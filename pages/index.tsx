@@ -28,9 +28,9 @@ export default function Home() {
 
   return (
     <main className="flex justify-center items-center min-h-screen">
-      <div className="container mx-5 w-full h-64 md:w-96 md:h-96 border-2 border-white rounded-lg shadow-white">
+      <div className="container mx-4 w-full md:w-1/2 border-2 border-white rounded-lg shadow-white shadow-md">
         <h1 className='text-3xl text-center mt-2'>Leistungsgradrechner</h1>
-        <h1 className="text-1xl text-center mt-2">Wartezeiten um 106% in 8 Stunden zu erreichen</h1>
+        <h1 className=" text-lg italic text-center mt-2">(Wartezeiten um 106% in 8 Stunden zu erreichen)</h1>
         <div className="mt-4 flex justify-center">
           <div className="flex mx-5">
             <input
@@ -48,38 +48,38 @@ export default function Home() {
             </button>
           </div>
         </div>
-        <h2 className='text-center mt-2'>Wartezeiten</h2>
+        <h2 className='text-center my-4'>Wartezeiten</h2>
 
         {/* Centered Table with 2 columns and 3 rows */}
-        <div className="mt-4 flex justify-center">
+        <div className="my-4 flex justify-center">
           <table className="border border-white">
             <thead>
               <tr>
                 <th className="border border-white"></th>
-                <th className="border border-white">Wartezeit</th>
+                <th className="border border-white px-2">Wartezeit</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td className="border border-white">Technisch (ungepl.)</td>
-                <td className="border border-white font-bold text-right">{remainingTime} min</td>
+                <td className="border border-white px-2">Technisch (ungepl.)</td>
+                <td className="border border-white font-bold text-right px-2">{remainingTime} min</td>
               </tr>
               <tr>
-                <td className="border border-white">Technisch (geplant)</td>
-                <td className="border border-white font-bold text-right">~</td>
+                <td className="border border-white px-2">Technisch (geplant)</td>
+                <td className="border border-white font-bold text-right px-2">~</td>
               </tr>
               <tr>
-                <td className="border border-white">Qualität</td>
-                <td className="border border-white font-bold text-right">~</td>
+                <td className="border border-white px-2">Qualität</td>
+                <td className="border border-white font-bold text-right px-2">~</td>
               </tr>
             </tbody>
           </table>
         </div>
 
         {remainingTime !== null && (
-          <div className="text-center mt-4">
+          <div className="text-center my-4">
             {remainingTime > 0 ? (
-              <p>Wartezeit um 106% in 8 Stunden zu erreichen: {remainingTime} minutes</p>
+              <p>Wartezeit um 106% in 8 Stunden zu erreichen: {remainingTime} Minuten</p>
             ) : (
               <p>You have already reached or exceeded 106% in 8 hours.</p>
             )}
