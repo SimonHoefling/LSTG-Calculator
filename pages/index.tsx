@@ -62,7 +62,7 @@ export default function Home() {
             <tbody>
               <tr>
                 <td className="border border-white px-2">Technisch (ungepl.)</td>
-                <td className="border border-white font-bold text-right px-2">{remainingTime} min</td>
+                <td className="border border-white font-bold text-right px-2">{remainingTime ? `${remainingTime} min` : null}</td>
               </tr>
               <tr>
                 <td className="border border-white px-2">Technisch (geplant)</td>
