@@ -31,6 +31,24 @@ export default function Home() {
       <div className="container mx-5 w-full md:w-1/2 shadow-lg shadow-black rounded-lg bg-black">
         <h1 className='text-3xl text-center mt-2 text-white'>Leistungsgradrechner</h1>
         <h1 className="text-md italic text-center mt-2 px-2 text-white">(Wartezeiten um 106% in 8 Stunden zu erreichen)</h1>
+
+        <div className="mt-4 flex justify-center">
+          <div className="flex flex-col mx-5">
+            <input
+              type="number"
+              className="border border-gray-300 text-black rounded-md px-3 py-2 mb-2"
+              placeholder="Techn. (geplant) min"
+              // Add necessary event handlers and value
+            />
+            <input
+              type="number"
+              className="border border-gray-300 text-black rounded-md px-3 py-2"
+              placeholder="Qualität min"
+              // Add necessary event handlers and value
+            />
+          </div>
+        </div>
+
         <div className="mt-4 flex justify-center">
           <div className="flex mx-5">
             <input
@@ -85,9 +103,8 @@ export default function Home() {
             )}
           </div>
         )}
-
-
       </div>
     </main>
   );
+
 }
