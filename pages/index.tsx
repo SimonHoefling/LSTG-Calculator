@@ -4,10 +4,24 @@ import React, { useState } from 'react';
 
 export default function Home() {
   const [inputValue, setInputValue] = useState<number | string>('');
+  const [technischInputValue, setTechnischInputValue] = useState<number | string>('');
+  const [qualitatInputValue, setQualitatInputValue] = useState<number | string>('');
   const [remainingTime, setRemainingTime] = useState<number | null>(null);
+  const [tableValues, setTableValues] = useState<{ technisch: string | number, qualitat: string | number }>({
+    technisch: '',
+    qualitat: ''
+  });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
+  };
+
+  const handleTechnischInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTechnischInputValue(e.target.value);
+  };
+
+  const handleQualitatInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQualitatInputValue(e.target.value);
   };
 
   const handleCalculate = () => {
@@ -26,6 +40,14 @@ export default function Home() {
     }
   };
 
+  const handleAddToTable = () => {
+    // Set the input values to the table
+    setTableValues({
+      technisch: technischInputValue,
+      qualitat: qualitatInputValue
+    });
+  };
+
   return (
     <main className="flex justify-center items-center min-h-screen">
       <div className="container mx-5 w-full md:w-1/2 shadow-lg shadow-black rounded-lg bg-black">
@@ -38,13 +60,15 @@ export default function Home() {
               type="number"
               className="border border-gray-300 text-black rounded-md px-3 py-2 mb-2"
               placeholder="Techn. (geplant) min"
-              // Add necessary event handlers and value
+              value={technischInputValue}
+              onChange={handleTechnischInputChange}
             />
             <input
               type="number"
               className="border border-gray-300 text-black rounded-md px-3 py-2"
               placeholder="Qualität min"
-              // Add necessary event handlers and value
+              value={qualitatInputValue}
+              onChange={handleQualitatInputChange}
             />
           </div>
         </div>
@@ -60,7 +84,10 @@ export default function Home() {
             />
             <button
               className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-              onClick={handleCalculate}
+              onClick={() => {
+                handleCalculate();
+                handleAddToTable();
+              }}
             >
               Berechnen
             </button>
@@ -80,15 +107,17 @@ export default function Home() {
             <tbody>
               <tr>
                 <td className="border border-white px-2 text-white">Technisch (ungepl.)</td>
-                <td className="border border-white font-bold text-right px-2 text-white">{remainingTime ? `${remainingTime} min` : null}</td>
+                <td className="border border-white font-bold text-right px-2 text-white">
+                  {remainingTime !== null ? `${remainingTime - (tableValues.technisch ? parseFloat(tableValues.technisch as string) : 0) - (tableValues.qualitat ? parseFloat(tableValues.qualitat as string) : 0)} min` : null}
+                </td>
               </tr>
               <tr>
                 <td className="border border-white px-2 text-white">Technisch (geplant)</td>
-                <td className="border border-white font-bold text-right px-2 text-white">~</td>
+                <td className="border border-white font-bold text-right px-2 text-white">{tableValues.technisch ? `${tableValues.technisch} min` : null}</td>
               </tr>
               <tr>
                 <td className="border border-white px-2 text-white">Qualität</td>
-                <td className="border border-white font-bold text-right px-2 text-white">~</td>
+                <td className="border border-white font-bold text-right px-2 text-white">{tableValues.qualitat ? `${tableValues.qualitat} min` : null}</td>
               </tr>
             </tbody>
           </table>
@@ -106,5 +135,4 @@ export default function Home() {
       </div>
     </main>
   );
-
 }
