@@ -48,7 +48,7 @@ export default function Home() {
             </button>
           </div>
         </div>
-        <h2 className='text-center my-4'>Wartezeiten</h2>
+        <h2 className='text-center my-4 text-white'>Wartezeiten</h2>
 
         {/* Centered Table with 2 columns and 3 rows */}
         <div className="my-4 flex justify-center">
