@@ -28,9 +28,9 @@ export default function Home() {
 
   return (
     <main className="flex justify-center items-center min-h-screen">
-      <div className="container mx-4 w-full md:w-1/2 shadow-lg shadow-black rounded-lg bg-black">
+      <div className="container mx-5 w-full md:w-1/2 shadow-lg shadow-black rounded-lg bg-black">
         <h1 className='text-3xl text-center mt-2 text-white'>Leistungsgradrechner</h1>
-        <h1 className="text-md italic text-center mt-2 text-white">(Wartezeiten um 106% in 8 Stunden zu erreichen)</h1>
+        <h1 className="text-md italic text-center mt-2 px-2 text-white">(Wartezeiten um 106% in 8 Stunden zu erreichen)</h1>
         <div className="mt-4 flex justify-center">
           <div className="flex mx-5">
             <input
@@ -48,10 +48,10 @@ export default function Home() {
             </button>
           </div>
         </div>
-        <h2 className='text-center my-4 text-white'>Wartezeiten</h2>
+        <h2 className='text-center mt-4 mb-2 text-white'>Wartezeiten</h2>
 
         {/* Centered Table with 2 columns and 3 rows */}
-        <div className="my-4 flex justify-center">
+        <div className="mt-2 mb-4 flex justify-center">
           <table className="border border-white">
             <thead>
               <tr>
@@ -79,7 +79,7 @@ export default function Home() {
         {remainingTime !== null && (
           <div className="text-center my-4 text-white">
             {remainingTime > 0 ? (
-              <p>Wartezeit um 106% in 8 Stunden zu erreichen: {remainingTime} Minuten</p>
+              <p>Wartezeit gesammt um 106% in 8 Stunden zu erreichen: <br /> <span className='font-bold'>{remainingTime} Minuten</span></p>
             ) : (
               <p>You have already reached or exceeded 106% in 8 hours.</p>
             )}
