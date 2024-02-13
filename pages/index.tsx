@@ -26,19 +26,20 @@ export default function Home() {
 
   const handleCalculate = () => {
     const inputNumber = parseFloat(inputValue as string);
-    const totalPieces = 1570.37; // Total pieces produced in 8 hours
-    const targetPieces = totalPieces * 1.06; // Target number of pieces (106% of production)
+    const totalPieces = 1570.37; // Total pieces produced in 7.5 hours
+    const targetPieces = totalPieces; // Target number of pieces (equal to totalPieces for reaching 106%)
 
-    if (inputNumber <= totalPieces) {
+    if (inputNumber < totalPieces) {
       const piecesRemaining = targetPieces - inputNumber;
-      const piecesPerMinute = totalPieces / (8 * 60); // Average pieces produced per minute
+      const piecesPerMinute = totalPieces / (7.5 * 60); // Average pieces produced per minute
       const minutesRemaining = Math.ceil(piecesRemaining / piecesPerMinute); // Round up to nearest whole number
       setRemainingTime(minutesRemaining);
     } else {
-      alert('You have already exceeded 106% in 8 hours.');
+      alert('You have already reached the maximum production for 7.5 hours.');
       setRemainingTime(0);
     }
   };
+
 
   const handleAddToTable = () => {
     // Set the input values to the table
@@ -52,7 +53,7 @@ export default function Home() {
     <main className="flex justify-center items-center min-h-screen">
       <div className="container mx-5 w-full md:w-1/2 shadow-lg shadow-black rounded-lg bg-black">
         <h1 className='text-3xl text-center mt-2 text-white'>Leistungsgradrechner</h1>
-        <h1 className="text-md italic text-center mt-2 px-2 text-white">(Wartezeiten um 106% in 8 Stunden zu erreichen)</h1>
+        <h1 className="text-md italic text-center mt-2 px-2 text-white">(Wartezeiten um 106% in 7,5 Stunden zu erreichen)</h1>
 
         <div className="mt-4 flex justify-center">
           <div className="flex flex-col mx-5">
@@ -107,17 +108,17 @@ export default function Home() {
             <tbody>
               <tr>
                 <td className="border border-white px-2 text-white">Technisch (ungepl.)</td>
-                <td className="border border-white font-bold text-right px-2 text-white">
+                <td className="border border-white font-bold text-right px-2 text-green-500">
                   {remainingTime !== null ? `${remainingTime - (tableValues.technisch ? parseFloat(tableValues.technisch as string) : 0) - (tableValues.qualitat ? parseFloat(tableValues.qualitat as string) : 0)} min` : null}
                 </td>
               </tr>
               <tr>
                 <td className="border border-white px-2 text-white">Technisch (geplant)</td>
-                <td className="border border-white font-bold text-right px-2 text-white">{tableValues.technisch ? `${tableValues.technisch} min` : null}</td>
+                <td className="border border-white font-bold text-right px-2 text-green-500">{tableValues.technisch ? `${tableValues.technisch} min` : null}</td>
               </tr>
               <tr>
                 <td className="border border-white px-2 text-white">Qualität</td>
-                <td className="border border-white font-bold text-right px-2 text-white">{tableValues.qualitat ? `${tableValues.qualitat} min` : null}</td>
+                <td className="border border-white font-bold text-right px-2 text-green-500">{tableValues.qualitat ? `${tableValues.qualitat} min` : null}</td>
               </tr>
             </tbody>
           </table>
@@ -126,9 +127,9 @@ export default function Home() {
         {remainingTime !== null && (
           <div className="text-center my-4 text-white">
             {remainingTime > 0 ? (
-              <p>Wartezeit gesammt um 106% in 8 Stunden zu erreichen: <br /> <span className='font-bold'>{remainingTime} Minuten</span></p>
+              <p>Wartezeit gesammt um 106% in 7,5 Stunden zu erreichen: <br /> <span className='font-bold'>{remainingTime} Minuten</span></p>
             ) : (
-              <p>You have already reached or exceeded 106% in 8 hours.</p>
+              <p>You have already reached or exceeded 106% in 7,5 hours.</p>
             )}
           </div>
         )}
