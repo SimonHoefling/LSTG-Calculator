@@ -53,47 +53,60 @@ export default function Home() {
     <main className="flex justify-center items-center min-h-screen">
       <div className="container mx-5 w-full md:w-1/2 shadow-lg shadow-black rounded-lg bg-black">
         <h1 className='text-3xl text-center mt-2 text-white'>Leistungsgradrechner</h1>
-        <h1 className="text-md italic text-center mt-2 px-2 text-white">(Wartezeiten um 106% in 7,5 Stunden zu erreichen)</h1>
+        <h1 className="text-sm italic text-center mt-2 px-2 text-white">(Wartezeiten um 106% in 7,5 Stunden zu erreichen)</h1>
 
         <div className="mt-4 flex justify-center">
           <div className="flex flex-col mx-5">
-            <input
-              type="number"
-              className="border border-gray-300 text-black rounded-md px-3 py-2 mb-2"
-              placeholder="Techn. (geplant) min"
-              value={technischInputValue}
-              onChange={handleTechnischInputChange}
-            />
-            <input
-              type="number"
-              className="border border-gray-300 text-black rounded-md px-3 py-2"
-              placeholder="Qualität min"
-              value={qualitatInputValue}
-              onChange={handleQualitatInputChange}
-            />
+            <div className="flex items-center mb-2">
+              <label htmlFor="technischInput" className="text-white mr-2" style={{ width: '120px' }}>Techn. (geplant)</label>
+              <input
+                id="technischInput"
+                type="number"
+                className="border border-gray-300 text-black rounded-md px-2 py-1 text-right"
+                placeholder="min"
+                value={technischInputValue}
+                onChange={handleTechnischInputChange}
+              />
+            </div>
+            <div className="flex items-center mb-2">
+              <label htmlFor="qualitatInput" className="text-white mr-2" style={{ width: '120px' }}>Qualität</label>
+              <input
+                id="qualitatInput"
+                type="number"
+                className="border border-gray-300 text-black rounded-md px-2 py-1 text-right"
+                placeholder="min"
+                value={qualitatInputValue}
+                onChange={handleQualitatInputChange}
+              />
+            </div>
+            <div className="flex items-center">
+              <label htmlFor="stuckzahlInput" className="text-white mr-2" style={{ width: '120px' }}>Stückzahl</label>
+              <input
+                id="stuckzahlInput"
+                type="number"
+                className="border border-gray-300 text-black rounded-md px-2 py-1 text-right"
+                placeholder="****"
+                value={inputValue}
+                onChange={handleInputChange}
+              />
+            </div>
           </div>
         </div>
 
         <div className="mt-4 flex justify-center">
-          <div className="flex mx-5">
-            <input
-              type="number"
-              className="border border-gray-300 text-black rounded-md px-3 py-2 mr-2"
-              placeholder="Stückzahl"
-              value={inputValue}
-              onChange={handleInputChange}
-            />
-            <button
-              className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-              onClick={() => {
-                handleCalculate();
-                handleAddToTable();
-              }}
-            >
-              Berechnen
-            </button>
-          </div>
-        </div>
+  <div className="flex mx-5 w-full md:w-1/3">
+    <button
+      className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full"
+      onClick={() => {
+        handleCalculate();
+        handleAddToTable();
+      }}
+    >
+      Berechnen
+    </button>
+  </div>
+</div>
+
         <h2 className='text-center mt-4 mb-2 text-white'>Wartezeiten</h2>
 
         {/* Centered Table with 2 columns and 3 rows */}
