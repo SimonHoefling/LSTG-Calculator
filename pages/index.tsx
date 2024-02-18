@@ -6,10 +6,12 @@ export default function Home() {
   const [inputValue, setInputValue] = useState<number | string>('');
   const [technischInputValue, setTechnischInputValue] = useState<number | string>('');
   const [qualitatInputValue, setQualitatInputValue] = useState<number | string>('');
+  const [rüstenInputValue, setRüstenInputValue] = useState<number | string>('');
   const [remainingTime, setRemainingTime] = useState<number | null>(null);
-  const [tableValues, setTableValues] = useState<{ technisch: string | number, qualitat: string | number }>({
+  const [tableValues, setTableValues] = useState<{ technisch: string | number, qualitat: string | number, rüsten: string | number }>({
     technisch: '',
-    qualitat: ''
+    qualitat: '',
+    rüsten: ''
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,6 +24,10 @@ export default function Home() {
 
   const handleQualitatInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQualitatInputValue(e.target.value);
+  };
+
+  const handleRüstenInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setRüstenInputValue(e.target.value);
   };
 
   const handleCalculate = () => {
@@ -45,7 +51,8 @@ export default function Home() {
     // Set the input values to the table
     setTableValues({
       technisch: technischInputValue,
-      qualitat: qualitatInputValue
+      qualitat: qualitatInputValue,
+      rüsten: rüstenInputValue
     });
   };
 
@@ -79,6 +86,19 @@ export default function Home() {
                 onChange={handleQualitatInputChange}
               />
             </div>
+
+            <div className="flex items-center mb-2">
+              <label htmlFor="rüstenInput" className="text-white mr-2" style={{ width: '120px' }}>Rüsten</label>
+              <input
+                id="rüstenInput"
+                type="number"
+                className="border border-gray-300 text-black rounded-md px-2 py-1 text-right"
+                placeholder="min"
+                value={rüstenInputValue}
+                onChange={handleRüstenInputChange}
+              />
+            </div>
+
             <div className="flex items-center">
               <label htmlFor="stuckzahlInput" className="text-white mr-2" style={{ width: '120px' }}>Stückzahl</label>
               <input
@@ -93,23 +113,24 @@ export default function Home() {
           </div>
         </div>
 
+        {/* Button to trigger the calculate function and add the input values to the table */}
         <div className="mt-4 flex justify-center">
-  <div className="flex mx-5 w-full md:w-1/3">
-    <button
-      className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full"
-      onClick={() => {
-        handleCalculate();
-        handleAddToTable();
-      }}
-    >
-      Berechnen
-    </button>
-  </div>
-</div>
+          <div className="flex mx-5 w-full md:w-1/3">
+            <button
+              className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full"
+              onClick={() => {
+                handleCalculate();
+                handleAddToTable();
+              }}
+            >
+              Berechnen
+            </button>
+          </div>
+        </div>
 
         <h2 className='text-center mt-4 mb-2 text-white'>Wartezeiten</h2>
 
-        {/* Centered Table with 2 columns and 3 rows */}
+        {/* Centered Table with 2 columns and 4 rows */}
         <div className="mt-2 mb-4 flex justify-center">
           <table className="border border-white">
             <thead>
@@ -122,7 +143,7 @@ export default function Home() {
               <tr>
                 <td className="border border-white px-2 text-white">Technisch (ungepl.)</td>
                 <td className="border border-white font-bold text-right px-2 text-green-500">
-                  {remainingTime !== null ? `${remainingTime - (tableValues.technisch ? parseFloat(tableValues.technisch as string) : 0) - (tableValues.qualitat ? parseFloat(tableValues.qualitat as string) : 0)} min` : null}
+                  {remainingTime !== null ? `${remainingTime - (tableValues.technisch ? parseFloat(tableValues.technisch as string) : 0) - (tableValues.qualitat ? parseFloat(tableValues.qualitat as string) : 0) - (tableValues.rüsten ? parseFloat(tableValues.rüsten as string) : 0)} min` : null}
                 </td>
               </tr>
               <tr>
@@ -133,10 +154,15 @@ export default function Home() {
                 <td className="border border-white px-2 text-white">Qualität</td>
                 <td className="border border-white font-bold text-right px-2 text-green-500">{tableValues.qualitat ? `${tableValues.qualitat} min` : null}</td>
               </tr>
+              <tr>
+                <td className="border border-white px-2 text-white">Rüsten</td>
+                <td className="border border-white font-bold text-right px-2 text-green-500">{tableValues.rüsten ? `${tableValues.rüsten} min` : null}</td>
+              </tr>
             </tbody>
           </table>
         </div>
 
+        {/* Conclution */}
         {remainingTime !== null && (
           <div className="text-center my-4 text-white">
             {remainingTime > 0 ? (
